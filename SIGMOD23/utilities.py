@@ -195,8 +195,6 @@ def flushCache():
     
 def relaxed_tsetin_transformation(lineage, variables, weights):
     
-    #TO AMMEND SEEMS WRONG
-    #lineage = set(lineage)
     mapping = dict(zip(variables, [str(i) for i in range(1,len(variables)+1)]))
     number_of_variables = len(variables) 
     
@@ -258,7 +256,6 @@ def MCSolver(solver_exec, querier, predicate, answers, lineage_per_answer, varia
         terms = list()
         for argument in answer:
             terms.append(querier.get_term_name(argument))
-            #results.write('{} {}\n'.format(','.join(terms), probability))
         print('{} out of {}: {}'.format(i, len(lineage_per_answer), ','.join(terms)))
         
         start_per_answer = datetime.datetime.now()
