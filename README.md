@@ -65,7 +65,7 @@ The successful execution of the instructions will produce the following:
 
 * glog.so, a shared library for calling the engine within Python.
 
-### 5. Install PySDD ###
+### 4. Install PySDD ###
 
 This is a library for computing probabilities of formulas. Notice that it is not required to build the ltgs API. However, it is needed to reproduce the experiments from the SIGMOD 2023 submission. See https://pypi.org/project/PySDD/ for a documentation. To install it run the following command: 
 
