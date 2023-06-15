@@ -73,6 +73,14 @@ This is a library for computing probabilities of formulas. Notice that it is not
 pip install pysdd
 ```
 
+### 5. Install Problog ###
+
+It offers convinience functions for circuit manipulation.
+
+```
+pip install problog
+```
+
 ## Using the Python API ##
 
 The Python API provides the following functionality: 
