@@ -188,3 +188,144 @@ def loadVQARDatabase(inpath:str, separator:str, condition:str)->Dict[str,List]:
                 facts.append(tuple(arguments[start:]))
             derived_data[predicate] = facts
     return derived_data
+
+def flushCache():
+    process = subprocess.Popen(shlex.split('sudo /cm/shared/package/utils/bin/drop_caches'), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    process.wait()
+    
+def relaxed_tsetin_transformation(lineage, variables, weights):
+    
+    #TO AMMEND SEEMS WRONG
+    #lineage = set(lineage)
+    mapping = dict(zip(variables, [str(i) for i in range(1,len(variables)+1)]))
+    number_of_variables = len(variables) 
+    
+    #Apply the substitution to the lineage 
+    mapped_lineage = []
+    for disjunct in lineage:
+        mapped_lineage.append([*map(mapping.get, disjunct)])
+        #print([*map(mapping.get, disjunct)])
+    
+    mapped_weights = {mapping[k]: w for k, w in weights.items()}
+    
+    zs = list()
+    rs = list()
+    clauses = list()
+    #apply the relaxed tsetin transformation
+    for disjunct in mapped_lineage:
+        #create two fresh variables 
+        z = str(number_of_variables + 1)
+        r = str(number_of_variables + 2)
+        number_of_variables = number_of_variables + 2
+        
+        #the z's should be cached
+        zs.append(z)
+        #the r's should be cached
+        rs.append(r)
+    
+        clause = ['-' + X for X in disjunct]
+        clause.append(z)
+        clauses.append(clause)
+                
+        clause = ['-' + X for X in disjunct]
+        clause.append(r)
+        clauses.append(clause)
+        
+        clause = [z,r]
+        clauses.append(clause)
+        
+    clauses.append(zs)
+        
+    for z in zs:
+        mapped_weights[z] = 1
+        mapped_weights['-' + z] = 1
+
+    for r in rs:
+        mapped_weights[r] = 1
+        mapped_weights['-' + r] = -1
+        
+    return clauses, mapped_weights, number_of_variables
+    
+def MCSolver(solver_exec, querier, predicate, answers, lineage_per_answer, variables_per_answer):
+    
+    results = open('answers/{}.c2d.txt'.format(predicate), 'a') 
+    
+    output = 'answers'
+    total_time = 0 
+    for i, lineage in enumerate(lineage_per_answer):
+           
+        answer = answers[i]
+        terms = list()
+        for argument in answer:
+            terms.append(querier.get_term_name(argument))
+            #results.write('{} {}\n'.format(','.join(terms), probability))
+        print('{} out of {}: {}'.format(i, len(lineage_per_answer), ','.join(terms)))
+        
+        start_per_answer = datetime.datetime.now()
+        if len(lineage) > 1:
+            
+            #Open a file for writing 
+            #The name of the file should be the name of the predicate
+            solver_input = open('{}/{}.cnf'.format(output, predicate), 'w')
+            variables = variables_per_answer[i]
+            weights = dict(zip(variables, [0.5 for i in range(1,len(variables)+1)]))
+            
+            #Translate from DNF to CNF
+            start = datetime.datetime.now()
+            #clauses = list(itertools.product(*mapped_lineage))
+            clauses, mapped_weights, number_of_variables = relaxed_tsetin_transformation(lineage, variables, weights)
+            end = datetime.datetime.now()
+            duration = end - start    
+            total_time += duration.total_seconds() * 1000
+            print('Time for translation {}\n'.format(duration.total_seconds() * 1000))
+            
+            #Write instance-specific information
+            solver_input.write('p wcnf {} {}\n'.format(number_of_variables, len(clauses)))
+            
+            #Write the weights of the variables 
+            for X,W in mapped_weights.items():
+                solver_input.write('w {} {}\n'.format(X, W))
+            
+            #Write each CNF to the file
+            for element in clauses:
+                solver_input.write('{} 0\n'.format(' '.join(element)))
+                
+            solver_input.close()
+                
+            #Call the solver 
+            cmd = solver_exec + ' -count ' + ' -smooth_all ' + ' -in {}/{}.cnf '.format(output, predicate)
+            print(cmd)
+            fout = output + "/results_" + predicate
+            o = open(fout, 'wt')
+            ferr = output + "/logs_" + predicate
+            o2 = open(ferr, 'wt')
+            o2.write('CMD: ' + cmd + '\n')
+            o2.flush()
+            start = datetime.datetime.now()
+            process = subprocess.Popen(shlex.split(cmd), stdout=o, stderr=o2)
+            process.wait()
+            end = datetime.datetime.now()
+            duration = end - start    
+            total_time += duration.total_seconds() * 1000
+            print('Time for invoking the executable {}\n'.format(duration.total_seconds() * 1000))
+            flushCache()
+
+        else:
+            probability = 1
+            t_disjunct = lineage[0]
+            start = datetime.datetime.now()
+            for fact in set(t_disjunct):
+                probability = probability * 0.5
+            end = datetime.datetime.now()
+            duration = end - start
+            total_time += duration.total_seconds() * 1000
+        
+        
+        end_per_answer = datetime.datetime.now()
+        duration = end_per_answer - start_per_answer
+        time_to_wmc = duration.total_seconds() * 1000
+        results.write('{} {}\n'.format(','.join(terms), str(time_to_wmc)))
+            
+    results.close()            
+    return total_time
+
