@@ -358,3 +358,7 @@ else:
     with open('LUBM-QA-100.txt', 'a') as file:
         file.write('Q1' + ' ' + statistics + ' is empty ' + '\n')  
 ```
+
+### Probability computation using the c2d solver ###
+
+By default, probability is computed via pysdd. To call the c2d solver instead, first install c2d from https://zenodo.org/record/4292581/files/MC2020_Solvers.tar.bz2?download=1, and call ```MCSolver``` instead of calling ```computeProbability``` with one additional argument, that is the path to the solver, e.g., ```MC2020_Solvers/MC2020_SubmissionsSolvers/track2/c2d-wmc-solver/bin/c2d```. 
