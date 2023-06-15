@@ -1,0 +1,16 @@
+timeout 15m ./glog probtgchase --edb edb-Q243.conf --rules rules-Q243.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q243 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q34.conf --rules rules-Q34.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q34 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q15.conf --rules rules-Q15.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q15 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q130.conf --rules rules-Q130.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q130 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q343.conf --rules rules-Q343.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q343 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q146.conf --rules rules-Q146.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q146 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q432.conf --rules rules-Q432.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q432 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q133.conf --rules rules-Q133.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q133 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q21.conf --rules rules-Q21.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q21 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q138.conf --rules rules-Q138.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q138 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q112.conf --rules rules-Q112.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q112 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q219.conf --rules rules-Q219.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q219 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q423.conf --rules rules-Q423.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q423 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q239.conf --rules rules-Q239.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q239 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q223.conf --rules rules-Q223.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q223 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
+timeout 15m ./glog probtgchase --edb edb-Q24.conf --rules rules-Q24.dlog --logLevel info --querycont 0 --edbcheck 0 --storemat_path model_Q24 --storemat_format files --decompressmat 1 2>&1 | tee logs.txt 
