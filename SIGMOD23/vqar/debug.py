@@ -11,7 +11,7 @@ import datetime
 from utilities_clean import computeLineage, computeProbability, loadVQARDatabase
 
 loglevel = 2 # INFO level
-main_dir = 'path-to-VQAR/test/C6'
+main_dir = 'path-to-vqar/test/C6'
 os.chdir(main_dir)
 chaseProcedure = "probtgchase" 
 typeProv = "FULLPROV"
