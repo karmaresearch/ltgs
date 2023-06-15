@@ -16,7 +16,7 @@ To run the experiments, copy the following:
 ### Notice
 
 
-- Folder ```answers``` and file ```all_exact_results_tgs.txt``` can be produced by running https://github.sec.samsung.net/efi-tsamoura/tgs-api/blob/master/SIGMOD23/vqar/debug.py or can be copied from ```VQAR\SIGMOD23```.
+- Folder ```answers``` and file ```all_exact_results_tgs.txt``` can be produced by running ??? or can be copied from ```VQAR\SIGMOD23```.
 - Files ```all_top1_scallop.txt``` and ```all_top20_scallop.txt``` can be produced by running Scallop with top1 and top20 options or can be copied from ```VQAR\SIGMOD23```.
 
 ## Running [Scallop](https://proceedings.neurips.cc/paper/2021/hash/d367eef13f90793bd8121e2f675f0dc2-Abstract.html) 
