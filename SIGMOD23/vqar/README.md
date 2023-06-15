@@ -1,4 +1,4 @@
-# Reproducing the VQAR-related experiments
+# Reproducing the experiments on VQAR
 
 ## Data
 
