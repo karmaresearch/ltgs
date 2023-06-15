@@ -3,8 +3,8 @@
 ## Data
 
 To run the experiments, copy the following:
-- ```VQAR\test\C6``` contains the C6 part of the [VQAR](https://proceedings.neurips.cc/paper/2021/hash/d367eef13f90793bd8121e2f675f0dc2-Abstract.html) testing queries.
-- ```VQAR\SIGMOD23``` contains cached experimental results.
+- ```vqar\test\C6``` contains the C6 part of the [VQAR](https://proceedings.neurips.cc/paper/2021/hash/d367eef13f90793bd8121e2f675f0dc2-Abstract.html) testing queries.
+- ```vqar\SIGMOD23``` contains cached experimental results.
 
 
 ## Folder structure
